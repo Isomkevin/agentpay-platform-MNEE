@@ -13,7 +13,7 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <Bot className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-900">AgentPay</span>
+              <span className="text-xl font-bold text-gray-900">Autonomey</span>
             </div>
             <ConnectButton />
           </div>
@@ -28,9 +28,9 @@ export default function Home() {
             <br />
             <span className="text-primary-600">Infrastructure Platform</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Programmable money for AI agents, commerce, and automated finance.
-            Built with MNEE stablecoin on Ethereum.
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Give AI agents their own bank account. Autonomous treasury management
+            for AI agents using MNEE programmable stablecoins.
           </p>
           <div className="flex gap-4 justify-center">
             <Link
@@ -108,7 +108,7 @@ export default function Home() {
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Bot className="h-6 w-6" />
-              <span className="text-xl font-bold">AgentPay</span>
+              <span className="text-xl font-bold">Autonomey</span>
             </div>
             <p className="text-gray-400 mb-4">
               MNEE Hackathon 2026 Submission

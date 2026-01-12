@@ -6,8 +6,8 @@ import { Providers } from './providers';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'AgentPay - AI Agent Payment Infrastructure',
-  description: 'Programmable money for AI agents, commerce, and automated finance using MNEE stablecoin',
+  title: 'Autonomey - AI Agent Autonomous Treasury Platform',
+  description: 'Give AI agents their own bank account. Autonomous treasury management using MNEE programmable stablecoins',
 };
 
 export default function RootLayout({

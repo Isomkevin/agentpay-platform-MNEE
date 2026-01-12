@@ -3,11 +3,14 @@
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
-import { Bot, Wallet, ShoppingCart, FileText, ArrowLeft } from 'lucide-react';
+import { Bot, Wallet, ShoppingCart, FileText, ArrowLeft, Send, Lock, Repeat } from 'lucide-react';
 import { AgentRegistration } from '@/components/AgentRegistration';
 import { AgentBalance } from '@/components/AgentBalance';
+import { PaymentForm } from '@/components/PaymentForm';
 import { ServiceList } from '@/components/ServiceList';
 import { EscrowList } from '@/components/EscrowList';
+import { EscrowForm } from '@/components/EscrowForm';
+import { StreamingPayments } from '@/components/StreamingPayments';
 
 export default function Dashboard() {
   const { isConnected, address } = useAccount();
@@ -46,15 +49,9 @@ export default function Dashboard() {
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
               <Bot className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-900">AgentPay</span>
+              <span className="text-xl font-bold text-gray-900">Autonomey</span>
             </Link>
             <div className="flex items-center gap-4">
-              <Link
-                href="/marketplace"
-                className="text-gray-700 hover:text-primary-600 font-medium"
-              >
-                Marketplace
-              </Link>
               <ConnectButton />
             </div>
           </div>
@@ -82,7 +79,7 @@ export default function Dashboard() {
           />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Agent Registration
@@ -96,12 +93,32 @@ export default function Dashboard() {
             </h2>
             <AgentBalance />
           </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <Send className="h-5 w-5 text-primary-600" />
+              Execute Payment
+            </h2>
+            <PaymentForm />
+          </div>
 
           <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-              Your Services
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+              <Lock className="h-5 w-5 text-primary-600" />
+              Create Escrow
             </h2>
-            <ServiceList />
+            <EscrowForm />
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 mb-8">
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+              Streaming Payments
+            </h2>
+            <StreamingPayments />
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-6">
@@ -110,6 +127,13 @@ export default function Dashboard() {
             </h2>
             <EscrowList />
           </div>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+            Your Services
+          </h2>
+          <ServiceList />
         </div>
       </div>
     </div>

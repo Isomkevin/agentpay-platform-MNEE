@@ -8,8 +8,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const config = getDefaultConfig({
-  appName: 'AgentPay',
-  projectId: 'agentpay-mnee-hackathon',
+  appName: 'Autonomey',
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'autonomey-mnee-hackathon',
   chains: [mainnet, sepolia, hardhat],
   ssr: true,
 });
