@@ -1,13 +1,26 @@
 /** @type {import('next').NextConfig} */
+const webpack = require('webpack');
+
 const nextConfig = {
   reactStrictMode: true,
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
       net: false,
       tls: false,
     };
+    
+    // Ignore optional dependencies that aren't needed for web builds
+    config.plugins.push(
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^@react-native-async-storage\/async-storage$/,
+      }),
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^pino-pretty$/,
+      })
+    );
+    
     return config;
   },
 };
