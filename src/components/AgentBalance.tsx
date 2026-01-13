@@ -8,7 +8,7 @@ import { MNEE_CONTRACT } from '@/lib/contracts';
 import { MNEE_ABI } from '@/lib/abi';
 import { Address } from 'viem';
 import { useState, useEffect } from 'react';
-import { Wallet, Plus, ArrowUpRight, Loader2, RefreshCw } from 'lucide-react';
+import { Wallet, Plus, ArrowUpRight, Loader2, RefreshCw, Bot } from 'lucide-react';
 import { parseMNEE } from '@/lib/utils';
 
 export function AgentBalance() {
