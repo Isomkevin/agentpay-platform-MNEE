@@ -10,6 +10,7 @@
 The problem is simple: AI agents can do amazing work, but they're financially paralyzed. Every payment requires human approval, preventing true autonomy. Autonomey solves this by enabling agents to autonomously manage finances using MNEE."
 
 **Actions:**
+
 - Show home page
 - Navigate to dashboard
 - Connect wallet (Sepolia testnet)
@@ -22,6 +23,7 @@ The problem is simple: AI agents can do amazing work, but they're financially pa
 "Let me show you how this works. I'm creating an agent called 'Alpha' - an AI research agent that needs to autonomously pay for services."
 
 **Actions:**
+
 1. Navigate to Agent Registration
 2. Fill form:
    - Name: "Alpha"
@@ -59,6 +61,7 @@ The problem is simple: AI agents can do amazing work, but they're financially pa
 "Alpha needs monthly API access. Instead of manually approving every payment, I'll create a subscription that pays automatically every month."
 
 **Actions:**
+
 1. Navigate to Streaming Payments
 2. Click "+ Create"
 3. Select "Subscription"
@@ -78,6 +81,7 @@ The problem is simple: AI agents can do amazing work, but they're financially pa
 "Alpha needs a data service, but we only want to pay if the data quality is good. I'll create a conditional payment rule."
 
 **Actions:**
+
 1. Navigate to Payment Form
 2. Select "Conditional Payment"
 3. Enter:
@@ -96,6 +100,7 @@ The problem is simple: AI agents can do amazing work, but they're financially pa
 "Alpha needs developer work done. Instead of paying all upfront or all at the end, I'll use milestone-based escrow - paying incrementally as work is completed."
 
 **Actions:**
+
 1. Navigate to Escrow Form
 2. Select "Milestone Based"
 3. Enter:
@@ -123,6 +128,7 @@ The problem is simple: AI agents can do amazing work, but they're financially pa
 "Sometimes Alpha needs to pay immediately for a service. Let me show a direct payment."
 
 **Actions:**
+
 1. Navigate to Payment Form
 2. Select "Direct Payment"
 3. Enter:
@@ -142,6 +148,7 @@ The problem is simple: AI agents can do amazing work, but they're financially pa
 "Let me show you what just happened. In the last few minutes, Alpha autonomously managed multiple financial operations."
 
 **Actions:**
+
 1. Navigate to Agent Balance
 2. Show updated balance
 3. Show all transaction hashes
@@ -152,6 +159,7 @@ The problem is simple: AI agents can do amazing work, but they're financially pa
 "Notice all transactions are on-chain, transparent, and verifiable. Alpha's balance updated from 500 to [calculated amount] after all operations.
 
 **Key Metrics:**
+
 - Total transactions: [count]
 - Amount transacted: [calculate]
 - Zero manual approvals for autonomous operations
@@ -175,6 +183,7 @@ MNEE is the ONLY solution that provides stable value + programmability + autonom
 This is the infrastructure the agent economy needs. This is Autonomey."
 
 **Actions:**
+
 - Show home page
 - Highlight "Give AI agents their own bank account"
 - Close
