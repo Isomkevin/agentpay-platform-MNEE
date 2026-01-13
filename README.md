@@ -1,4 +1,4 @@
-# Autonomey (formerly AutoPay) - AI Agent Autonomous Treasury Platform
+# Autonomey - AI Agent Autonomous Treasury Platform
 
 🏆 **MNEE Hackathon Submission** - Programmable Money for Agents, Commerce, and Automated Finance
 
@@ -70,7 +70,7 @@ Backend Layer (Node.js API)
 On-Chain Layer (Smart Contracts)
     ├── AgentTreasury.sol
     ├── PaymentRules.sol
-    ├── EscrowManager.sol
+    ├── EscrowContract.sol
     └── StreamingPayments.sol
     ↓
 MNEE Contract (0x8ccedbAe...)
@@ -95,7 +95,8 @@ For complete architecture details, see [PRODUCT_BLUEPRINT.md](./PRODUCT_BLUEPRIN
 5. **Why This Wins** (30s) - Only possible with MNEE
 
 **Live Demo**: [Link to deployed application]  
-**Demo Video**: [Link to video]
+**Demo Video**: [Link to video]  
+**Demo Script**: See [DEMO_SCRIPT.md](./DEMO_SCRIPT.md)
 
 ---
 
@@ -107,59 +108,72 @@ For complete architecture details, see [PRODUCT_BLUEPRINT.md](./PRODUCT_BLUEPRIN
 - npm or yarn
 - MetaMask or compatible Web3 wallet
 - Ethereum RPC URL (Alchemy/Infura)
-- MNEE tokens for testing
+- MNEE tokens for testing (mainnet or testnet)
 
 ### Installation
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/autonomey
-cd autonomey
+git clone <repository-url>
+cd MNEE_Hackathon
 
 # Install dependencies
-npm install
+npm install --legacy-peer-deps
 
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your configuration
+# Generate environment template
+npm run generate:env
+
+# Copy and configure environment
+cp .env.template .env
+# Edit .env with your API keys and configuration
 
 # Compile contracts
-cd contracts
-npm install
+npm run compile
+# OR
 npx hardhat compile
 
 # Deploy contracts (testnet)
-npx hardhat run scripts/deploy.ts --network sepolia
+npm run deploy:sepolia
+# OR
+npx hardhat run scripts/deploy.js --network sepolia
 
-# Start backend
-cd ../backend
-npm install
-npm run dev
+# Update .env with deployed addresses from deployed-addresses.json
 
-# Start frontend (new terminal)
-cd ../frontend
-npm install
+# Verify deployment
+npm run verify:deployment
+
+# Start development server
 npm run dev
 ```
 
 Visit `http://localhost:3000` to see the application.
 
+**For detailed deployment instructions, see [DEPLOYMENT_AND_TESTING.md](./DEPLOYMENT_AND_TESTING.md)**  
+**For quick start, see [QUICK_START.md](./QUICK_START.md)**
+
 ### Environment Variables
 
-```env
-# Blockchain
-MNEE_CONTRACT=0x8ccedbAe4916b79da7F3F612EfB2EB93A2bFD6cF
-CHAIN_ID=1
-RPC_URL=your_ethereum_rpc_url
-ETHERSCAN_API_KEY=your_etherscan_key
-
-# Database
-DATABASE_URL=postgresql://user:pass@localhost:5432/autonomey
-
-# API
-PORT=3001
-JWT_SECRET=your_jwt_secret
+Generate environment template:
+```bash
+npm run generate:env
 ```
+
+This creates `.env.template` with all required variables. Copy to `.env` and fill in:
+
+**Required for Deployment:**
+- `PRIVATE_KEY` - Wallet private key for deployment
+- `RPC_URL` - Ethereum RPC URL (Alchemy/Infura)
+- `ETHERSCAN_API_KEY` - For contract verification
+
+**Required for Frontend:**
+- `NEXT_PUBLIC_AGENT_TREASURY_ADDRESS` - After deployment
+- `NEXT_PUBLIC_PAYMENT_RULES_ADDRESS` - After deployment
+- `NEXT_PUBLIC_STREAMING_PAYMENTS_ADDRESS` - After deployment
+- `NEXT_PUBLIC_ESCROW_CONTRACT_ADDRESS` - After deployment
+- `NEXT_PUBLIC_CHAIN_ID` - Network chain ID (11155111 for Sepolia, 1 for Mainnet)
+- `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` - Optional, for WalletConnect
+
+**See [DEPLOYMENT_AND_TESTING.md](./DEPLOYMENT_AND_TESTING.md) for detailed configuration.**
 
 ---
 
@@ -170,21 +184,24 @@ autonomey/
 ├── contracts/              # Smart contracts
 │   ├── AgentTreasury.sol
 │   ├── PaymentRules.sol
-│   ├── EscrowManager.sol
+│   ├── EscrowContract.sol
 │   └── StreamingPayments.sol
-├── backend/               # Backend API
-│   ├── src/
-│   │   ├── services/
-│   │   ├── api/
-│   │   └── models/
-│   └── prisma/
-├── frontend/              # Next.js application
-│   ├── src/
-│   │   ├── app/
-│   │   ├── components/
-│   │   └── hooks/
 ├── scripts/               # Deployment scripts
+│   ├── deploy.js
+│   ├── verify-deployment.js
+│   └── generate-env-template.js
+├── src/
+│   ├── app/               # Next.js app
+│   │   ├── dashboard/     # Dashboard page
+│   │   ├── marketplace/   # Marketplace page
+│   │   └── ...
+│   ├── components/        # React components
+│   ├── hooks/             # React hooks
+│   └── lib/               # Utilities and config
 ├── PRODUCT_BLUEPRINT.md  # Complete product blueprint
+├── DEPLOYMENT_AND_TESTING.md  # Deployment guide
+├── DEMO_SCRIPT.md        # Demo script
+├── QUICK_START.md        # Quick start guide
 └── README.md
 ```
 
@@ -194,7 +211,6 @@ autonomey/
 
 - **Smart Contracts**: Solidity, Hardhat, OpenZeppelin
 - **Frontend**: Next.js 14, TypeScript, Tailwind CSS, Wagmi, RainbowKit
-- **Backend**: Node.js, Express, PostgreSQL, Prisma
 - **Blockchain**: Ethereum, MNEE Stablecoin
 - **Wallet**: MetaMask, WalletConnect
 
@@ -202,16 +218,15 @@ autonomey/
 
 ## 📄 Documentation
 
-- **[PRODUCT_BLUEPRINT.md](./PRODUCT_BLUEPRINT.md)** - Complete product blueprint including:
-  - Problem & Insight
-  - Solution & Value
-  - Architecture Details
-  - MNEE Integration
-  - AI & Automation Logic
-  - Demo Flow
-  - Implementation Plan
-  - Devpost Submission Content
-  - Why This Wins
+- **[PRODUCT_BLUEPRINT.md](./PRODUCT_BLUEPRINT.md)** - Complete product blueprint
+- **[DEPLOYMENT_AND_TESTING.md](./DEPLOYMENT_AND_TESTING.md)** - Deployment and testing guide
+- **[DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)** - Quick deployment reference
+- **[DEMO_SCRIPT.md](./DEMO_SCRIPT.md)** - 5-minute demo script
+- **[QUICK_START.md](./QUICK_START.md)** - Quick start guide
+- **[FINAL_CHECKLIST.md](./FINAL_CHECKLIST.md)** - Pre-demo checklist
+- **[IMPLEMENTATION_STATUS.md](./IMPLEMENTATION_STATUS.md)** - Implementation status
+
+**New to the project? Start with [START_HERE.md](./START_HERE.md)**
 
 ---
 
@@ -285,6 +300,21 @@ Built for **MNEE Hackathon 2026**
 - **Demo Video**: [Link]
 - **Devpost Submission**: [Link]
 - **GitHub**: [Link]
+
+---
+
+## 🎯 Status
+
+**Implementation:** ✅ **COMPLETE**  
+**Status:** ✅ **READY FOR DEPLOYMENT AND DEMO**
+
+All components implemented and tested. Ready for:
+- Contract deployment
+- Frontend testing
+- Demo presentation
+- Hackathon submission
+
+**See [FINAL_CHECKLIST.md](./FINAL_CHECKLIST.md) for pre-demo checklist.**
 
 ---
 

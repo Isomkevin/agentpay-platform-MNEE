@@ -1,11 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-interface IERC20 {
-    function transfer(address to, uint256 amount) external returns (bool);
-    function transferFrom(address from, address to, uint256 amount) external returns (bool);
-    function balanceOf(address account) external view returns (uint256);
-}
+import "./interfaces/IMNEE.sol";
 
 contract EscrowContract {
     address public constant MNEE_CONTRACT = 0x8ccedbAe4916b79da7F3F612EfB2EB93A2bFD6cF;
@@ -51,7 +47,7 @@ contract EscrowContract {
         require(payee != address(0), "Invalid payee address");
         require(amount > 0, "Amount must be greater than 0");
         
-        IERC20 mnee = IERC20(MNEE_CONTRACT);
+        IMNEE mnee = IMNEE(MNEE_CONTRACT);
         require(mnee.balanceOf(msg.sender) >= amount, "Insufficient balance");
         require(mnee.allowance(msg.sender, address(this)) >= amount, "Insufficient allowance");
         
@@ -92,7 +88,7 @@ contract EscrowContract {
         require(milestoneCount > 0, "Must have at least one milestone");
         require(totalAmount >= milestoneCount, "Amount must be >= milestone count");
         
-        IERC20 mnee = IERC20(MNEE_CONTRACT);
+        IMNEE mnee = IMNEE(MNEE_CONTRACT);
         require(mnee.balanceOf(msg.sender) >= totalAmount, "Insufficient balance");
         require(mnee.allowance(msg.sender, address(this)) >= totalAmount, "Insufficient allowance");
         
@@ -133,7 +129,7 @@ contract EscrowContract {
         uint256 amountToRelease = escrow.totalAmount - escrow.releasedAmount;
         require(amountToRelease > 0, "Nothing to release");
         
-        IERC20 mnee = IERC20(MNEE_CONTRACT);
+        IMNEE mnee = IMNEE(MNEE_CONTRACT);
         require(mnee.transfer(escrow.payee, amountToRelease), "Transfer failed");
         
         escrow.releasedAmount = escrow.totalAmount;
@@ -154,7 +150,7 @@ contract EscrowContract {
         escrow.completedMilestones++;
         escrow.releasedAmount += escrow.amountPerMilestone;
         
-        IERC20 mnee = IERC20(MNEE_CONTRACT);
+        IMNEE mnee = IMNEE(MNEE_CONTRACT);
         require(mnee.transfer(escrow.payee, escrow.amountPerMilestone), "Transfer failed");
         
         if (escrow.completedMilestones >= escrow.milestoneCount) {
@@ -175,7 +171,7 @@ contract EscrowContract {
         uint256 remainingAmount = escrow.totalAmount - escrow.releasedAmount;
         require(remainingAmount > 0, "Nothing to cancel");
         
-        IERC20 mnee = IERC20(MNEE_CONTRACT);
+        IMNEE mnee = IMNEE(MNEE_CONTRACT);
         require(mnee.transfer(escrow.payer, remainingAmount), "Transfer failed");
         
         escrow.status = EscrowStatus.Cancelled;
@@ -194,7 +190,7 @@ contract EscrowContract {
         uint256 amountToRelease = escrow.totalAmount - escrow.releasedAmount;
         require(amountToRelease > 0, "Nothing to release");
         
-        IERC20 mnee = IERC20(MNEE_CONTRACT);
+        IMNEE mnee = IMNEE(MNEE_CONTRACT);
         require(mnee.transfer(escrow.payee, amountToRelease), "Transfer failed");
         
         escrow.releasedAmount = escrow.totalAmount;
@@ -211,6 +207,6 @@ contract EscrowContract {
     
     // Get contract MNEE balance
     function getContractBalance() external view returns (uint256) {
-        return IERC20(MNEE_CONTRACT).balanceOf(address(this));
+        return IMNEE(MNEE_CONTRACT).balanceOf(address(this));
     }
 }

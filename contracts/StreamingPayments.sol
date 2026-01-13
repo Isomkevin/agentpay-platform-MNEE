@@ -52,10 +52,8 @@ contract StreamingPayments {
     event SubscriptionCancelled(uint256 indexed subscriptionId);
     
     modifier onlyAgentOwner(address agentId) {
-        require(
-            treasury.agents(agentId).owner == msg.sender,
-            "Not agent owner"
-        );
+        AgentTreasury.Agent memory agent = treasury.getAgent(agentId);
+        require(agent.owner == msg.sender, "Not agent owner");
         _;
     }
     
@@ -229,10 +227,8 @@ contract StreamingPayments {
      */
     function cancelSubscription(uint256 subscriptionId) external {
         Subscription storage sub = subscriptions[subscriptionId];
-        require(
-            treasury.agents(sub.agentId).owner == msg.sender,
-            "Not authorized"
-        );
+        AgentTreasury.Agent memory agent = treasury.getAgent(sub.agentId);
+        require(agent.owner == msg.sender, "Not authorized");
         sub.isActive = false;
         emit SubscriptionCancelled(subscriptionId);
     }

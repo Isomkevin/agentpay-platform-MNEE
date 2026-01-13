@@ -52,10 +52,8 @@ contract PaymentRules {
     event PaymentRuleDeactivated(uint256 indexed ruleId);
     
     modifier onlyAgentOwner(address agentId) {
-        require(
-            treasury.agents(agentId).owner == msg.sender,
-            "Not agent owner"
-        );
+        AgentTreasury.Agent memory agent = treasury.getAgent(agentId);
+        require(agent.owner == msg.sender, "Not agent owner");
         _;
     }
     
@@ -181,10 +179,8 @@ contract PaymentRules {
      */
     function deactivateRule(uint256 ruleId) external {
         PaymentRule storage rule = rules[ruleId];
-        require(
-            treasury.agents(rule.agentId).owner == msg.sender,
-            "Not authorized"
-        );
+        AgentTreasury.Agent memory agent = treasury.getAgent(rule.agentId);
+        require(agent.owner == msg.sender, "Not authorized");
         rule.isActive = false;
         emit PaymentRuleDeactivated(ruleId);
     }
